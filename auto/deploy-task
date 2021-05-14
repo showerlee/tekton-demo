@@ -1,0 +1,10 @@
+#!/bin/bash -e
+
+cd $(dirname $0)/..
+
+echo "Create namespace tekton-demo"
+kubectl create namespace tekton-demo
+
+echo "Deploying task in namespace tekton-demo..."
+kubectl apply -f pipeline/task.yaml
+# tkn task start hello --dry-run

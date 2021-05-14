@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+cd $(dirname $0)/..
+
+echo "Run task in namespace tekton-demo..."
+
+# Use tkn's --dry-run option to save the TaskRun to a file
+tkn task start hello -n tekton-demo --dry-run > ./pipeline/taskRun-hello.yaml
+# Create the TaskRun
+kubectl create -f ./pipeline/taskRun-hello.yaml
+
+# Print the output
+tkn taskrun logs -n tekton-demo --last -f
