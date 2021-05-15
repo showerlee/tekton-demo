@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+cd $(dirname $0)/..
+
+echo "Run pipeline in namespace tekton-demo..."
+
+# use tkn's --dry-run option to save the pipelineRun to a file
+tkn pipeline start -n tekton-demo hello-goodbye --dry-run > ./pipeline/pipelineRun-hello-goodbye.yaml
+# create the pipelineRun
+kubectl create -f ./pipeline/pipelineRun-hello-goodbye.yaml
+
+# Print the output
+tkn pipelinerun logs -n tekton-demo --last -f

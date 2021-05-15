@@ -3,8 +3,9 @@
 cd $(dirname $0)/..
 
 echo "Create namespace tekton-demo"
-kubectl create namespace tekton-demo
+kubectl create namespace tekton-demo --dry-run=client -o yaml | kubectl apply -f -
 
 echo "Deploying task in namespace tekton-demo..."
-kubectl apply -f pipeline/task.yaml
+kubectl apply -f pipeline/task-hello.yaml
+kubectl apply -f pipeline/task-goodbye.yaml
 # tkn task start hello --dry-run

@@ -26,3 +26,9 @@ auto/deploy-task
 ```
 auto/run-task
 ```
+
+- Run pipeline
+
+```
+auto/run-pipeline
+```

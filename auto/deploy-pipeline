@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+cd $(dirname $0)/..
+
+echo "Deploying pipeline in namespace tekton-demo..."
+
+kubectl apply -f ./pipeline/task-hello.yaml
+kubectl apply -f ./pipeline/task-goodbye.yaml
+kubectl apply -f ./pipeline/pipeline-hello-goodbye.yaml
