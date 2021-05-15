@@ -4,6 +4,6 @@ cd $(dirname $0)/..
 
 echo "Deploying the core component of Tekton in namespace tekton-pipelines..."
 
-kubectl apply -f tekton/template.yaml
+kubectl apply -f tekton/pipeline-controller.yaml
 kubectl patch deployment tekton-pipelines-controller -n tekton-pipelines -p '{"spec":{"template":{"metadata":{"annotations":{"timestamp": '\"$(date +'%s')\"' }}}}}'
 kubectl rollout status deployment/tekton-pipelines-controller -n tekton-pipelines

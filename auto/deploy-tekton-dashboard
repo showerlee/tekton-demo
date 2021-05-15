@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+cd $(dirname $0)/..
+
+echo "Deploying tekton-dashboard in namespace tekton-pipelines..."
+
+kubectl apply -f tekton/dashboard.yaml
+kubectl patch deployment tekton-dashboard -n tekton-pipelines -p '{"spec":{"template":{"metadata":{"annotations":{"timestamp": '\"$(date +'%s')\"' }}}}}'
+kubectl rollout status deployment/tekton-dashboard -n tekton-pipelines

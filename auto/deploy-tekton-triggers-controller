@@ -1,0 +1,9 @@
+#!/bin/bash -e
+
+cd $(dirname $0)/..
+
+echo "Deploying tekton-triggers-controller in namespace tekton-pipelines..."
+
+kubectl apply -f tekton/triggers-controller.yaml
+kubectl patch deployment tekton-triggers-controller -n tekton-pipelines -p '{"spec":{"template":{"metadata":{"annotations":{"timestamp": '\"$(date +'%s')\"' }}}}}'
+kubectl rollout status deployment/tekton-triggers-controller -n tekton-pipelines
